@@ -1,4 +1,5 @@
 .eslintrc.js
 next-config.js
+.lintstagedrc.js
 node_modules/
 public/
