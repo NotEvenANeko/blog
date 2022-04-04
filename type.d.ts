@@ -1,8 +1,18 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      SITE_LABEL: string;
+      NEXT_PUBLIC_SITE_LABEL: string;
     }
+  }
+}
+
+declare module '@mui/material/styles' {
+  interface Theme {
+    contentWidthScale: number;
+  }
+
+  interface ThemeOptions {
+    contentWidthScale?: number;
   }
 }
 

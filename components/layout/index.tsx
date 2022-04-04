@@ -7,7 +7,7 @@ export const AppLayout: FC = ({ children }) => {
   return (
     <>
       <AppHeader />
-      <Box sx={{ paddingTop: '3.25rem' }}>{children}</Box>
+      <Box sx={{ paddingTop: '4rem' }}>{children}</Box>
     </>
   );
 };
