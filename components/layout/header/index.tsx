@@ -1,4 +1,4 @@
-import { FC, useState, useMemo, useCallback } from 'react';
+import { FC, useState, useMemo, useCallback, useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -16,9 +16,23 @@ import {
 } from '@mui/material';
 import { Home, Inventory, Menu as MenuIcon } from '@mui/icons-material';
 import Link from 'next/link';
+import { throttle } from 'throttle-debounce';
 
 export const AppHeader: FC = () => {
   const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState(() =>
+    typeof window === 'object'
+      ? document.getElementsByTagName('html')[0].scrollTop < 10
+      : true
+  );
+
+  useEffect(() => {
+    const onScroll = throttle(50, () => {
+      setScroll(() => document.getElementsByTagName('html')[0].scrollTop < 10);
+    });
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleOpenChange = useCallback(
     (value?: boolean) => () => {
@@ -66,9 +80,30 @@ export const AppHeader: FC = () => {
     [NavList]
   );
 
+  // TODO: fix bugs in md sm xs
   return (
     <ClickAwayListener onClickAway={handleOpenChange(false)}>
-      <AppBar position="fixed">
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: (theme: Theme) => ({
+            xs: !scroll
+              ? theme.palette.primary.main
+              : open
+              ? theme.palette.primary.main
+              : 'rgba(0, 0, 0, 0)',
+            md: scroll ? 'rgba(0, 0, 0, 0)' : theme.palette.primary.main,
+          }),
+          transition: (theme: Theme) =>
+            theme.transitions.create(['background-color', 'height'], {
+              duration: theme.transitions.duration.standard,
+            }),
+          height: scroll ? '4rem' : '3.5rem',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'start',
+        }}
+      >
         <Container
           sx={{
             maxWidth: (theme: Theme) => ({
@@ -79,7 +114,14 @@ export const AppHeader: FC = () => {
           }}
         >
           <Toolbar sx={{ justifyContent: 'space-between' }}>
-            <Typography variant="h6">TEST</Typography>
+            <Typography
+              sx={{
+                fontSize: '1.25rem',
+                fontWeight: 700,
+              }}
+            >
+              TEST
+            </Typography>
 
             <Stack
               direction="row"
@@ -120,6 +162,7 @@ export const AppHeader: FC = () => {
                 xs: 'block',
                 md: 'none',
               },
+              backgroundColor: (theme: Theme) => theme.palette.primary.main,
             }}
           >
             <MenuList>
