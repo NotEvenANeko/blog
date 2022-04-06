@@ -80,7 +80,6 @@ export const AppHeader: FC = () => {
     [NavList]
   );
 
-  // TODO: fix bugs in md sm xs
   return (
     <ClickAwayListener onClickAway={handleOpenChange(false)}>
       <AppBar
@@ -95,13 +94,9 @@ export const AppHeader: FC = () => {
             md: scroll ? 'rgba(0, 0, 0, 0)' : theme.palette.primary.main,
           }),
           transition: (theme: Theme) =>
-            theme.transitions.create(['background-color', 'height'], {
+            theme.transitions.create(['background-color'], {
               duration: theme.transitions.duration.standard,
             }),
-          height: scroll ? '4rem' : '3.5rem',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'start',
         }}
       >
         <Container
@@ -111,9 +106,16 @@ export const AppHeader: FC = () => {
               md: theme.contentWidthScale * theme.breakpoints.values.md,
               lg: theme.contentWidthScale * theme.breakpoints.values.lg,
             }),
+            height: scroll ? '4rem' : '3.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            transition: (theme: Theme) =>
+              theme.transitions.create(['height'], {
+                duration: theme.transitions.duration.standard,
+              }),
           }}
         >
-          <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Toolbar sx={{ justifyContent: 'space-between', flexGrow: 1 }}>
             <Typography
               sx={{
                 fontSize: '1.25rem',
@@ -154,34 +156,34 @@ export const AppHeader: FC = () => {
               </IconButton>
             </Box>
           </Toolbar>
-
-          <Collapse
-            in={open}
-            sx={{
-              display: {
-                xs: 'block',
-                md: 'none',
-              },
-              backgroundColor: (theme: Theme) => theme.palette.primary.main,
-            }}
-          >
-            <MenuList>
-              {processNavList(true).map((item, index) => (
-                <MenuItem
-                  key={index}
-                  sx={{
-                    '& a': {
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    },
-                  }}
-                >
-                  {item}
-                </MenuItem>
-              ))}
-            </MenuList>
-          </Collapse>
         </Container>
+
+        <Collapse
+          in={open}
+          sx={{
+            display: {
+              xs: 'block',
+              md: 'none',
+            },
+            width: '100vw',
+          }}
+        >
+          <MenuList>
+            {processNavList(true).map((item, index) => (
+              <MenuItem
+                key={index}
+                sx={{
+                  '& a': {
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                  },
+                }}
+              >
+                {item}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Collapse>
       </AppBar>
     </ClickAwayListener>
   );

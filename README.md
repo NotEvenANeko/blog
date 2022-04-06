@@ -1,7 +1,7 @@
 # Blog
 
 ### TODOS
-- [ ] fix display bugs when down md and open menu
+- [x] fix display bugs when down md and open menu
 - [ ] add fab
 - [ ] add layout for main page
 - [ ] impl scroll to load more
