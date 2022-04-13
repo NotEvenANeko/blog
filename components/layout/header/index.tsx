@@ -20,18 +20,15 @@ import { throttle } from 'throttle-debounce';
 
 export const AppHeader: FC = () => {
   const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState(() =>
-    typeof window === 'object'
-      ? document.getElementsByTagName('html')[0].scrollTop < 10
-      : true
-  );
+  const [scroll, setScroll] = useState(true);
 
   useEffect(() => {
     const onScroll = throttle(50, () => {
-      setScroll(() => document.getElementsByTagName('html')[0].scrollTop < 10);
+      setScroll(() => document.documentElement.scrollTop < 10);
     });
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    onScroll();
+    document.addEventListener('scroll', onScroll);
+    return () => document.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleOpenChange = useCallback(
