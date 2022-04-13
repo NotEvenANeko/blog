@@ -3,7 +3,7 @@ import { Box, Container, Paper, Theme, Typography } from '@mui/material';
 
 export interface DefaultLayoutProps {
   headerTitle?: string | ReactElement;
-  headerHeight?: number;
+  headerHeight: number;
 }
 
 export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
@@ -11,7 +11,7 @@ export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
     <Box>
       <Box
         sx={{
-          height: `${props.headerHeight ?? 55}vh`,
+          height: `${props.headerHeight}vh`,
           background:
             'rgba(0, 0, 0, 0) url("https://rmt.dogedoge.com/fetch/fluid/storage/bg/1cm6iu.png?w=1920&fmt=webp") no-repeat scroll center center / cover',
         }}
@@ -56,9 +56,7 @@ export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
           sx={{
             padding: '2rem',
             marginTop: '-2rem',
-            minHeight: `${
-              props.headerHeight ? 100 - props.headerHeight : 45
-            }vh`,
+            minHeight: `${100 - props.headerHeight}vh`,
             borderRadius: '0.5rem',
           }}
         >
