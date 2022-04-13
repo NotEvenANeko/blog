@@ -20,6 +20,7 @@ export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
   headerTitle?: string | ReactElement;
   headerHeight?: number;
+  activeFab?: boolean;
 };
 
 interface AppWithLayoutProps extends AppProps {
@@ -39,13 +40,19 @@ const MyApp: FC<AppWithLayoutProps> = ({ Component, pageProps }) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AppLayout>
+      <AppLayout
+        fabActiveHeight={
+          Component.activeFab === false
+            ? undefined
+            : Component.headerHeight ?? 55
+        }
+      >
         {Component.getLayout ? (
           Component.getLayout(<Component {...pageProps} />)
         ) : (
           <DefaultLayout
             headerTitle={Component.headerTitle}
-            headerHeight={Component.headerHeight}
+            headerHeight={Component.headerHeight ?? 55}
           >
             <Component {...pageProps} />
           </DefaultLayout>

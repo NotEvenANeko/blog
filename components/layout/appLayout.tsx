@@ -1,9 +1,37 @@
-import { FC } from 'react';
-import { Box, Theme } from '@mui/material';
+import { FC, useState, useEffect, useCallback } from 'react';
+import { Box, Theme, Slide, Fab } from '@mui/material';
+import { ExpandLess } from '@mui/icons-material';
+import { throttle } from 'throttle-debounce';
 
 import { AppHeader } from './header';
 
-export const AppLayout: FC = ({ children }) => {
+export interface AppLayoutProps {
+  fabActiveHeight?: number;
+}
+
+export const AppLayout: FC<AppLayoutProps> = (props) => {
+  const [fabShow, setFabShow] = useState(false);
+
+  useEffect(() => {
+    const onScroll = throttle(50, () => {
+      setFabShow(
+        () =>
+          !!props.fabActiveHeight &&
+          document.documentElement.scrollTop > props.fabActiveHeight
+      );
+    });
+    onScroll();
+    document.addEventListener('scroll', onScroll);
+    return () => document.removeEventListener('scroll', onScroll);
+  }, [props.fabActiveHeight]);
+
+  const handleFabClick = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
   return (
     <>
       <AppHeader />
@@ -13,8 +41,23 @@ export const AppLayout: FC = ({ children }) => {
           paddingBottom: '2rem',
         }}
       >
-        {children}
+        {props.children}
       </Box>
+      <Slide direction="up" in={fabShow}>
+        <Fab
+          size="medium"
+          onClick={handleFabClick}
+          sx={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            borderRadius: '4px',
+            backgroundColor: 'common.white',
+          }}
+        >
+          <ExpandLess fontSize="large" />
+        </Fab>
+      </Slide>
     </>
   );
 };
