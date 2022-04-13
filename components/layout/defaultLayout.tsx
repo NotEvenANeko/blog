@@ -1,12 +1,17 @@
-import { FC } from 'react';
-import { Box, Container, Paper, Theme } from '@mui/material';
+import { FC, ReactElement } from 'react';
+import { Box, Container, Paper, Theme, Typography } from '@mui/material';
 
-export const DefaultLayout: FC = ({ children }) => {
+export interface DefaultLayoutProps {
+  headerTitle?: string | ReactElement;
+  headerHeight?: number;
+}
+
+export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
   return (
     <Box>
       <Box
         sx={{
-          height: '55vh',
+          height: `${props.headerHeight ?? 55}vh`,
           background:
             'rgba(0, 0, 0, 0) url("https://rmt.dogedoge.com/fetch/fluid/storage/bg/1cm6iu.png?w=1920&fmt=webp") no-repeat scroll center center / cover',
         }}
@@ -15,8 +20,27 @@ export const DefaultLayout: FC = ({ children }) => {
           sx={{
             height: '100%',
             backgroundColor: 'rgba(0, 0, 0, 0.3)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
-        ></Box>
+        >
+          {props.headerTitle &&
+            (typeof props.headerTitle === 'string' ? (
+              <Typography
+                sx={{
+                  fontSize: '2.5rem',
+                  fontWeight: 500,
+                  lineHeight: 1.2,
+                  color: 'common.white',
+                }}
+              >
+                {props.headerTitle}
+              </Typography>
+            ) : (
+              props.headerTitle
+            ))}
+        </Box>
       </Box>
       <Container
         sx={{
@@ -25,7 +49,6 @@ export const DefaultLayout: FC = ({ children }) => {
             md: theme.contentWidthScale * theme.breakpoints.values.md,
             lg: theme.contentWidthScale * theme.breakpoints.values.lg,
           }),
-          //height: '100%',
         }}
       >
         <Paper
@@ -33,11 +56,13 @@ export const DefaultLayout: FC = ({ children }) => {
           sx={{
             padding: '2rem',
             marginTop: '-2rem',
-            minHeight: '45vh',
+            minHeight: `${
+              props.headerHeight ? 100 - props.headerHeight : 45
+            }vh`,
             borderRadius: '0.5rem',
           }}
         >
-          {children}
+          {props.children}
         </Paper>
       </Container>
     </Box>
