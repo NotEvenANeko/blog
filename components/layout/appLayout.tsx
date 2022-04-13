@@ -17,7 +17,8 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
       setFabShow(
         () =>
           !!props.fabActiveHeight &&
-          document.documentElement.scrollTop > props.fabActiveHeight
+          document.documentElement.scrollTop >
+            (props.fabActiveHeight / 100) * window.innerHeight
       );
     });
     onScroll();
