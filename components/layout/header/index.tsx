@@ -67,10 +67,17 @@ export const AppHeader: FC = () => {
               color: 'primary.contrastText',
               '& .MuiButton-startIcon': {
                 marginRight: 0.5,
+                fontSize: '0.875rem',
               },
             }}
           >
-            <Typography>{item.label}</Typography>
+            <Typography
+              sx={{
+                fontSize: '0.875rem',
+              }}
+            >
+              {item.label}
+            </Typography>
           </Button>
         </Link>
       )),
@@ -116,7 +123,7 @@ export const AppHeader: FC = () => {
             <Typography
               sx={{
                 fontSize: '1.25rem',
-                fontWeight: 700,
+                fontWeight: 'bolder',
               }}
             >
               TEST
