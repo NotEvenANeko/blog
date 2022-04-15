@@ -1,6 +1,14 @@
 import { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
-import { Box, Stack, styled, Typography, Theme, SxProps } from '@mui/material';
+import {
+  Box,
+  Stack,
+  styled,
+  Typography,
+  Theme,
+  SxProps,
+  Fade,
+} from '@mui/material';
 import { CalendarMonth, LocalOffer } from '@mui/icons-material';
 import dayjs from 'dayjs';
 
@@ -8,6 +16,7 @@ import { getPostsDetail } from 'lib';
 import type { NextPageWithLayout } from './_app';
 import Link from 'next/link';
 import { FC } from 'react';
+import { useLoadMore } from 'lib/hooks';
 
 const TagContainer = styled(Box)`
   display: flex;
@@ -47,6 +56,8 @@ const PostLinkWrapper: FC<PostLinkWrapperProps> = (props) => (
 const Home: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
+  const { data, loading, noMore } = useLoadMore(`api/posts`, props.postsData);
+
   return (
     <Stack
       spacing={6}
@@ -66,144 +77,160 @@ const Home: NextPageWithLayout<
         padding: '1rem',
       }}
     >
-      {props.postsData.map((item, index) => (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-          }}
-        >
-          <PostLinkWrapper
-            filename={item.filename}
-            sx={{
-              flexBasis: {
-                xs: '100%',
-                md: '33%',
-              },
-              px: '15px',
-              height: '10rem',
-            }}
-          >
-            <Box
-              sx={{
-                position: 'relative',
-                width: '100%',
-                height: '100%',
-                boxShadow: 10,
-              }}
-            >
-              <Image
-                alt="abc"
-                src={item.banner}
-                layout="fill"
-                objectFit="cover"
-              />
-            </Box>
-          </PostLinkWrapper>
+      {data.map((item, index) => (
+        <Fade key={index} in={true}>
           <Box
             sx={{
-              px: '1rem',
-              paddingBottom: '0.5rem',
-              paddingTop: {
-                xs: '1.25rem',
-                md: '0.5rem',
-              },
-              flexBasis: {
-                xs: '100%',
-                md: '66.7%',
-              },
+              display: 'flex',
+              flexWrap: 'wrap',
             }}
           >
             <PostLinkWrapper
               filename={item.filename}
               sx={{
-                color: (theme: Theme) => theme.palette.text.primary,
+                flexBasis: {
+                  xs: '100%',
+                  md: '33%',
+                },
+                px: '15px',
+                height: '10rem',
               }}
             >
-              <Typography
-                variant="h1"
+              <Box
                 sx={{
-                  fontSize: '1.5rem',
-                  fontWeight: 600,
-                  lineHeight: '1.4',
-                  marginBottom: '0.25rem',
+                  position: 'relative',
+                  width: '100%',
+                  height: '100%',
+                  boxShadow: 10,
                 }}
               >
-                {item.title}
-              </Typography>
-            </PostLinkWrapper>
-            <PostLinkWrapper
-              filename={item.filename}
-              sx={{
-                my: '0.5rem',
-                height: 'calc(1.4rem * 3)',
-                display: 'flex',
-                alignItems: 'center',
-                color: (theme: Theme) => theme.palette.text.secondary,
-              }}
-            >
-              <Typography
-                sx={{
-                  lineHeight: '1.4',
-                }}
-              >
-                {item.description}
-              </Typography>
+                <Image
+                  alt="abc"
+                  src={item.banner}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </Box>
             </PostLinkWrapper>
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                color: (theme: Theme) => theme.palette.text.secondary,
+                px: '1rem',
+                paddingBottom: '0.5rem',
+                paddingTop: {
+                  xs: '1.25rem',
+                  md: '0.5rem',
+                },
+                flexBasis: {
+                  xs: '100%',
+                  md: '66.7%',
+                },
               }}
             >
-              <TagContainer
+              <PostLinkWrapper
+                filename={item.filename}
                 sx={{
-                  marginRight: '1rem',
+                  color: (theme: Theme) => theme.palette.text.primary,
                 }}
               >
-                <CalendarMonth
-                  fontSize="inherit"
+                <Typography
+                  variant="h1"
                   sx={{
-                    marginRight: '0.2rem',
+                    fontSize: '1.5rem',
+                    fontWeight: 600,
+                    lineHeight: '1.4',
+                    marginBottom: '0.25rem',
                   }}
-                />
-                <Typography sx={{ fontSize: 'inherit' }}>
-                  {dayjs(item.createdAt).format('YYYY-M-D')}
+                >
+                  {item.title}
                 </Typography>
-              </TagContainer>
-              {item.categories.length > 0 && (
-                <TagContainer>
-                  <LocalOffer
+              </PostLinkWrapper>
+              <PostLinkWrapper
+                filename={item.filename}
+                sx={{
+                  my: '0.5rem',
+                  height: 'calc(1.4rem * 3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: (theme: Theme) => theme.palette.text.secondary,
+                }}
+              >
+                <Typography
+                  sx={{
+                    lineHeight: '1.4',
+                  }}
+                >
+                  {item.description}
+                </Typography>
+              </PostLinkWrapper>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  color: (theme: Theme) => theme.palette.text.secondary,
+                }}
+              >
+                <TagContainer
+                  sx={{
+                    marginRight: '1rem',
+                  }}
+                >
+                  <CalendarMonth
                     fontSize="inherit"
                     sx={{
                       marginRight: '0.2rem',
                     }}
                   />
-                  {item.categories.map((tag, index) => (
-                    <Link key={index} href={`/tag/${tag}`} passHref>
-                      <LinkContainer>
-                        <Typography
-                          sx={{
-                            marginRight:
-                              index === item.categories.length - 1
-                                ? 0
-                                : '0.2rem',
-                            fontSize: 'inherit',
-                          }}
-                        >
-                          {`#${tag}`}
-                        </Typography>
-                      </LinkContainer>
-                    </Link>
-                  ))}
+                  <Typography sx={{ fontSize: 'inherit' }}>
+                    {dayjs(item.createdAt).format('YYYY-M-D')}
+                  </Typography>
                 </TagContainer>
-              )}
+                {item.categories.length > 0 && (
+                  <TagContainer>
+                    <LocalOffer
+                      fontSize="inherit"
+                      sx={{
+                        marginRight: '0.2rem',
+                      }}
+                    />
+                    {item.categories.map((tag, index) => (
+                      <Link key={index} href={`/tag/${tag}`} passHref>
+                        <LinkContainer>
+                          <Typography
+                            sx={{
+                              marginRight:
+                                index === item.categories.length - 1
+                                  ? 0
+                                  : '0.2rem',
+                              fontSize: 'inherit',
+                            }}
+                          >
+                            {`#${tag}`}
+                          </Typography>
+                        </LinkContainer>
+                      </Link>
+                    ))}
+                  </TagContainer>
+                )}
+              </Box>
             </Box>
           </Box>
-        </Box>
+        </Fade>
       ))}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography
+          sx={{
+            color: (theme: Theme) => theme.palette.text.secondary,
+            fontSize: '1rem',
+          }}
+        >
+          {loading ? '加载中' : noMore ? '没有更多了' : '下滑以加载更多'}
+        </Typography>
+      </Box>
     </Stack>
   );
 };

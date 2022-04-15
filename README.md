@@ -4,8 +4,8 @@
 - [x] fix display bugs when down md and open menu
 - [x] add header picture text
 - [x] add fab
-- [ ] add layout for main page
-- [ ] impl scroll to load more
+- [x] add layout for main page
+- [x] impl scroll to load more
 - [ ] impl article page using remark & rehype, using ketax
 - [ ] impl archives page
 - [ ] impl tags page
@@ -16,3 +16,4 @@
 - [ ] add search
 - [ ] add comment system, maybe gittalk?
 - [ ] impl pwa for mobile
+- [ ] maybe add more animations to main page load more?
