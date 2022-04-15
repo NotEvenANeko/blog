@@ -20,6 +20,15 @@ const theme = createTheme({
   typography: {
     fontSize: 16,
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 800,
+      lg: 1200,
+      xl: 1500,
+    },
+  },
   contentWidthScale: 0.95,
 });
 
