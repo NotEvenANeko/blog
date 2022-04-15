@@ -12,21 +12,21 @@ export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
 
   useEffect(() => {
     const onScroll = throttle(10, () => {
-      console.log(
-        document.documentElement.clientHeight -
-          (props.headerHeight / 100) * window.innerHeight +
-          document.documentElement.scrollTop
-      );
-      setPaperMarginTop(() =>
-        Math.min(
-          6,
-          ((document.documentElement.clientHeight -
-            (props.headerHeight / 100) * window.innerHeight +
-            document.documentElement.scrollTop) /
-            500) *
-            6
-        )
-      );
+      setPaperMarginTop((cur) => {
+        return document.documentElement.scrollTop +
+          document.documentElement.clientHeight +
+          0.1 * window.innerHeight >
+          document.documentElement.scrollHeight
+          ? cur
+          : Math.min(
+              6,
+              ((document.documentElement.clientHeight -
+                (props.headerHeight / 100) * window.innerHeight +
+                document.documentElement.scrollTop) /
+                (0.5 * window.innerHeight)) *
+                6
+            );
+      });
     });
     onScroll();
     document.addEventListener('scroll', onScroll);
@@ -75,15 +75,25 @@ export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
             md: theme.contentWidthScale * theme.breakpoints.values.md,
             lg: theme.contentWidthScale * theme.breakpoints.values.lg,
           }),
+          padding: {
+            xs: 0,
+            sm: 'initial',
+          },
         }}
       >
         <Paper
           elevation={18}
           sx={{
             padding: '2rem',
-            marginTop: `-${paperMarginTop}rem`,
+            marginTop: {
+              xs: '0',
+              sm: `-${paperMarginTop}rem`,
+            },
             minHeight: `${100 - props.headerHeight}vh`,
             borderRadius: '0.5rem',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           {props.children}
