@@ -3,7 +3,7 @@
 ### TODOS
 - [x] fix display bugs when down md and open menu
 - [x] add header picture text
-- [ ] add fab
+- [x] add fab
 - [ ] add layout for main page
 - [ ] impl scroll to load more
 - [ ] impl article page using remark & rehype, using ketax
