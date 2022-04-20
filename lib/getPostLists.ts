@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import matter from 'gray-matter';
 
-import { BlogPostPath } from './constants';
+import { BlogPostPath, BlogPostIgnore } from './constants';
 
 export interface PostsDetail {
   title: string;
@@ -13,7 +13,10 @@ export interface PostsDetail {
   filename: string;
 }
 
-export const getPostLists = (): string[] => fs.readdirSync(BlogPostPath);
+export const getPostLists = (): string[] =>
+  fs
+    .readdirSync(BlogPostPath)
+    .filter((filename) => !BlogPostIgnore.includes(filename));
 
 export const getPostsDetail = (offset = 0, pageSize = 10): PostsDetail[] =>
   getPostLists()
