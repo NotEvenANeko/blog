@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useEffect, useCallback, ReactNode } from 'react';
 import { Box, Theme, Slide, Fab } from '@mui/material';
 import { ExpandLess } from '@mui/icons-material';
 import { throttle } from 'throttle-debounce';
@@ -7,6 +7,7 @@ import { AppHeader } from './header';
 
 export interface AppLayoutProps {
   fabActiveHeight?: number;
+  children: ReactNode;
 }
 
 export const AppLayout: FC<AppLayoutProps> = (props) => {

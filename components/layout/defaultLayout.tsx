@@ -1,10 +1,11 @@
-import { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, ReactElement, ReactNode, useEffect, useState } from 'react';
 import { Box, Container, Paper, Theme, Typography } from '@mui/material';
 import { throttle } from 'throttle-debounce';
 
 export interface DefaultLayoutProps {
   headerTitle?: string | ReactElement;
   headerHeight: number;
+  children: ReactNode;
 }
 
 export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
@@ -91,9 +92,6 @@ export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
             },
             minHeight: `${100 - props.headerHeight}vh`,
             borderRadius: '0.5rem',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
           }}
         >
           {props.children}
