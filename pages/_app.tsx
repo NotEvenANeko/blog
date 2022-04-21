@@ -7,6 +7,8 @@ import type { NextPage } from 'next';
 
 import { AppLayout, DefaultLayout } from 'components/layout';
 
+import '../styles/prism.light.css';
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -18,7 +20,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontSize: 16,
+    fontSize: 14,
   },
   breakpoints: {
     values: {
@@ -36,8 +38,9 @@ export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<
   P,
   IP
 > & {
-  getLayout?: (page: ReactElement) => ReactNode;
-  headerTitle?: string | ReactElement;
+  getLayout?: (page: ReactElement, props: unknown) => ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  headerTitle?: string | FC<any>;
   headerHeight?: number;
   activeFab?: boolean;
 };
@@ -65,10 +68,17 @@ const MyApp: FC<AppWithLayoutProps> = ({ Component, pageProps }) => {
         }
       >
         {Component.getLayout ? (
-          Component.getLayout(<Component {...pageProps} />)
+          Component.getLayout(<Component {...pageProps} />, pageProps)
         ) : (
           <DefaultLayout
-            headerTitle={Component.headerTitle}
+            headerTitle={
+              typeof Component.headerTitle === 'string' ||
+              !Component.headerTitle ? (
+                Component.headerTitle
+              ) : (
+                <Component.headerTitle {...pageProps} />
+              )
+            }
             headerHeight={Component.headerHeight ?? 55}
           >
             <Component {...pageProps} />

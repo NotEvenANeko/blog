@@ -15,7 +15,7 @@ import dayjs from 'dayjs';
 import { getPostsDetail } from 'lib';
 import type { NextPageWithLayout } from './_app';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useLoadMore } from 'lib/hooks';
 
 const TagContainer = styled(Box)`
@@ -45,6 +45,7 @@ const LinkContainer = styled(Box)(
 interface PostLinkWrapperProps {
   filename: string;
   sx?: SxProps<Theme>;
+  children: ReactNode;
 }
 
 const PostLinkWrapper: FC<PostLinkWrapperProps> = (props) => (
