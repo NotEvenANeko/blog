@@ -6,7 +6,7 @@
 - [x] add fab
 - [x] add layout for main page
 - [x] impl scroll to load more
-- [ ] impl article page using remark & rehype, using ketax
+- [x] impl article page using remark & rehype, using ketax
 - [ ] impl archives page
 - [ ] impl tags page
 - [ ] impl about page (using mdx?)
@@ -17,3 +17,4 @@
 - [ ] add comment system, maybe gittalk?
 - [ ] impl pwa for mobile
 - [ ] maybe add more animations to main page load more?
+- [ ] impl sidebar TOC for article page
