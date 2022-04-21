@@ -41,6 +41,7 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
         sx={{
           backgroundColor: (theme: Theme) => theme.palette.grey[200],
           paddingBottom: '2rem',
+          minHeight: '100vh',
         }}
       >
         {props.children}
