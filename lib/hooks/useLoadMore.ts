@@ -14,7 +14,6 @@ export const useLoadMore = <T = unknown>(
 
   const loadMore = useCallback(async () => {
     setLoading(true);
-    console.log('loading...');
     const prePage = curPage;
     setCurPage((cur) => cur + 1);
     try {
@@ -28,7 +27,6 @@ export const useLoadMore = <T = unknown>(
         )?.data ?? [];
       setData((data) => [...data, ...newData]);
       if (newData.length === 0) setNoMore(true);
-      console.log(newData);
     } finally {
       setLoading(false);
     }
