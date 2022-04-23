@@ -1,6 +1,9 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Link from 'next/link';
 import { Box, styled, Typography } from '@mui/material';
-import { CalendarMonth } from '@mui/icons-material';
+import { CalendarMonth, LocalOffer, Copyright } from '@mui/icons-material';
+import { useMemo } from 'react';
+import dayjs from 'dayjs';
 
 import { getPostContent, getPostLists, PostContent } from 'lib';
 import { useMdProcesser } from 'lib/hooks';
@@ -12,9 +15,8 @@ import {
   H5Title,
   H6Title,
 } from 'components/markdown';
+import { TagContainer, LinkContainer } from 'components';
 import { NextPageWithLayout } from '../_app';
-import { useMemo } from 'react';
-import dayjs from 'dayjs';
 
 const MarkdownContainer = styled(Box)(({ theme }) => ({
   padding: '0 5%',
@@ -137,12 +139,8 @@ PostPage.headerTitle = ({ data }: { data: PostContent }) => (
     >
       {data.title}
     </Typography>
-    <Box
+    <TagContainer
       sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
         marginTop: '1rem',
       }}
     >
@@ -154,9 +152,59 @@ PostPage.headerTitle = ({ data }: { data: PostContent }) => (
         }}
       />
       <Typography>{dayjs(data.createdAt).format('YYYY-M-D HH:mm')}</Typography>
-    </Box>
+    </TagContainer>
+    {data.categories.length > 0 && (
+      <TagContainer
+        sx={{
+          marginTop: '0.2rem',
+        }}
+      >
+        <LocalOffer
+          sx={{
+            marginRight: '0.2rem',
+            fontSize: '1rem',
+            lineHeight: 1,
+          }}
+        />
+        {data.categories.map((tag, index) => (
+          <Link key={index} href={`/tag/${tag}`} passHref>
+            <LinkContainer>
+              <Typography
+                sx={{
+                  marginRight:
+                    index === data.categories.length - 1 ? 0 : '0.2rem',
+                  fontSize: 'inherit',
+                }}
+              >
+                {`#${tag}`}
+              </Typography>
+            </LinkContainer>
+          </Link>
+        ))}
+      </TagContainer>
+    )}
+    <TagContainer
+      sx={{
+        marginTop: '0.2rem',
+      }}
+    >
+      <Copyright
+        sx={{ marginRight: '0.2rem', fontSize: '1rem', lineHeight: 1 }}
+      />
+      <Typography
+        component="a"
+        href={data.license.url}
+        sx={{
+          cursor: 'pointer',
+        }}
+      >
+        {data.license.name}
+      </Typography>
+    </TagContainer>
   </Box>
 );
+
+PostPage.headerHeight = 60;
 
 export const getStaticPaths: GetStaticPaths = () => ({
   paths: getPostLists().map((item) => ({

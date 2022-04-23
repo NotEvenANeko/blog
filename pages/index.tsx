@@ -1,14 +1,6 @@
 import { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
-import {
-  Box,
-  Stack,
-  styled,
-  Typography,
-  Theme,
-  SxProps,
-  Fade,
-} from '@mui/material';
+import { Box, Stack, Typography, Theme, SxProps, Fade } from '@mui/material';
 import { CalendarMonth, LocalOffer } from '@mui/icons-material';
 import dayjs from 'dayjs';
 
@@ -17,30 +9,7 @@ import type { NextPageWithLayout } from './_app';
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
 import { useLoadMore } from 'lib/hooks';
-
-const TagContainer = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  line-height: 1.5;
-`;
-
-const LinkContainer = styled(Box)(
-  ({ theme }) => `
-  transition: ${theme.transitions.create(['color'], {
-    duration: theme.transitions.duration.short,
-  })};
-  cursor: pointer;
-  &:hover {
-    color: #30a9de;
-    transition: ${theme.transitions.create(['color'], {
-      duration: theme.transitions.duration.short,
-    })};
-  }
-`
-);
+import { TagContainer, LinkContainer } from 'components';
 
 interface PostLinkWrapperProps {
   filename: string;
