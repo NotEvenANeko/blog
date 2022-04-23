@@ -7,7 +7,7 @@
 - [x] add layout for main page
 - [x] impl scroll to load more
 - [x] impl article page using remark & rehype, using ketax
-- [ ] impl archives page
+- [x] impl archives page
 - [x] impl tags page
 - [ ] impl about page (using mdx?)
 - [ ] impl friend link page
