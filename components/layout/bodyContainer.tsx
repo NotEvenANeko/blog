@@ -54,6 +54,7 @@ export const BodyContainer: FC<DefaultLayoutProps> = (props) => {
           },
           minHeight: `${100 - props.headerHeight}vh`,
           borderRadius: '0.5rem',
+          display: 'flex',
         }}
       >
         {props.children}
