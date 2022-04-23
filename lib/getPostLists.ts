@@ -27,7 +27,7 @@ export const getPostsDetail = (offset = 0, pageSize = 10): PostsDetail[] =>
         ? 1
         : -1
     )
-    .slice(offset, offset + pageSize)
+    .slice(offset, pageSize ? offset + pageSize : undefined)
     .map((file) => {
       const frontMatter = matter(
         fs.readFileSync(path.join(BlogPostPath, file), 'utf-8')
@@ -44,4 +44,15 @@ export const getPostsDetail = (offset = 0, pageSize = 10): PostsDetail[] =>
         filename: file,
         banner: frontMatter.data.banner as string,
       };
+    });
+
+export const getPostsDetailByTag = (
+  tag: string
+): Omit<PostsDetail, 'banner' | 'categories' | 'description'>[] =>
+  getPostsDetail(0, 0)
+    .filter((post) => (tag ? post.categories.includes(tag) : true))
+    .map((item) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { categories, banner, description, ...rest } = item;
+      return rest;
     });
