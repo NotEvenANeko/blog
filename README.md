@@ -18,3 +18,4 @@
 - [ ] impl pwa for mobile
 - [ ] maybe add more animations to main page load more?
 - [ ] impl sidebar TOC for article page
+- [x] error page
