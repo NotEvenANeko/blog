@@ -24,7 +24,7 @@ export const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
               ((document.documentElement.clientHeight -
                 (props.headerHeight / 100) * window.innerHeight +
                 document.documentElement.scrollTop) /
-                (0.5 * window.innerHeight)) *
+                (0.8 * window.innerHeight)) *
                 6
             );
       });
