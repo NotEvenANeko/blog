@@ -1,7 +1,8 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import type { FC } from 'react';
 
 import type { DefaultLayoutProps } from './defaultLayout';
+import { HeaderTitle } from './headerTitle';
 
 export const BodyHeader: FC<Omit<DefaultLayoutProps, 'children'>> = (props) => (
   <Box
@@ -22,16 +23,7 @@ export const BodyHeader: FC<Omit<DefaultLayoutProps, 'children'>> = (props) => (
     >
       {props.headerTitle &&
         (typeof props.headerTitle === 'string' ? (
-          <Typography
-            sx={{
-              fontSize: '2.5rem',
-              fontWeight: 500,
-              lineHeight: 1.2,
-              color: 'common.white',
-            }}
-          >
-            {props.headerTitle}
-          </Typography>
+          <HeaderTitle>{props.headerTitle}</HeaderTitle>
         ) : (
           props.headerTitle
         ))}
