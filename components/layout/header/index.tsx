@@ -14,7 +14,12 @@ import {
   Collapse,
   ClickAwayListener,
 } from '@mui/material';
-import { Home, Inventory, Menu as MenuIcon } from '@mui/icons-material';
+import {
+  Home,
+  Inventory,
+  Menu as MenuIcon,
+  Link as LinkIcon,
+} from '@mui/icons-material';
 import Link from 'next/link';
 import { throttle } from 'throttle-debounce';
 
@@ -51,6 +56,17 @@ export const AppHeader: FC = () => {
         uri: '/archive',
         icon: <Inventory />,
         label: '归档',
+      },
+      {
+        uri: '/friend',
+        icon: (
+          <LinkIcon
+            sx={{
+              transform: 'rotate(-45deg)',
+            }}
+          />
+        ),
+        label: '友链',
       },
     ],
     []
