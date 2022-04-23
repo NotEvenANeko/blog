@@ -48,7 +48,7 @@ export const AppHeader: FC = () => {
         label: '首页',
       },
       {
-        uri: '/archives',
+        uri: '/archive',
         icon: <Inventory />,
         label: '归档',
       },
