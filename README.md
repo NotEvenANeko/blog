@@ -8,7 +8,7 @@
 - [x] impl scroll to load more
 - [x] impl article page using remark & rehype, using ketax
 - [ ] impl archives page
-- [ ] impl tags page
+- [x] impl tags page
 - [ ] impl about page (using mdx?)
 - [ ] impl friend link page
 - [ ] add dark mode
@@ -19,3 +19,8 @@
 - [ ] maybe add more animations to main page load more?
 - [ ] impl sidebar TOC for article page
 - [x] error page
+- [ ] add i18n
+- [ ] add semantic html
+- [ ] add accessibility
+- [ ] refactor code, using mui typography for different font style
+- [ ] seperate category from tag
