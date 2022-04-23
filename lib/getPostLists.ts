@@ -16,6 +16,7 @@ export interface PostsDetail {
 export const getPostLists = (): string[] =>
   fs
     .readdirSync(BlogPostPath)
+    .filter((filename) => /.+\.md$/.test(filename))
     .filter((filename) => !BlogPostIgnore.includes(filename));
 
 export const getPostsDetail = (offset = 0, pageSize = 10): PostsDetail[] =>
