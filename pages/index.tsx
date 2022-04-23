@@ -26,7 +26,10 @@ const PostLinkWrapper: FC<PostLinkWrapperProps> = (props) => (
 const Home: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
-  const { data, loading, noMore } = useLoadMore(`api/posts`, props.postsData);
+  const { data, loading, noMore, error } = useLoadMore(
+    `api/posts`,
+    props.postsData
+  );
 
   return (
     <Stack
@@ -198,7 +201,13 @@ const Home: NextPageWithLayout<
             fontSize: '1rem',
           }}
         >
-          {loading ? '加载中' : noMore ? '没有更多了' : '下滑以加载更多'}
+          {loading
+            ? '加载中'
+            : error
+            ? '加载失败'
+            : noMore
+            ? '没有更多了'
+            : '下滑以加载更多'}
         </Typography>
       </Box>
     </Stack>

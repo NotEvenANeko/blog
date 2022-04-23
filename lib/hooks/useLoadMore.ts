@@ -11,11 +11,12 @@ export const useLoadMore = <T = unknown>(
   const [data, setData] = useState<T[]>(initialData ?? []);
   const [loading, setLoading] = useState(false);
   const [noMore, setNoMore] = useState(false);
+  const [error, setError] = useState(false);
 
   const loadMore = useCallback(async () => {
     setLoading(true);
+    setError(false);
     const prePage = curPage;
-    setCurPage((cur) => cur + 1);
     try {
       const newData =
         (
@@ -27,6 +28,9 @@ export const useLoadMore = <T = unknown>(
         )?.data ?? [];
       setData((data) => [...data, ...newData]);
       if (newData.length === 0) setNoMore(true);
+      setCurPage((cur) => cur + 1);
+    } catch {
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -54,5 +58,6 @@ export const useLoadMore = <T = unknown>(
     loadMore,
     loading,
     noMore,
+    error,
   };
 };
