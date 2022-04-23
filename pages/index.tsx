@@ -18,7 +18,7 @@ interface PostLinkWrapperProps {
 }
 
 const PostLinkWrapper: FC<PostLinkWrapperProps> = (props) => (
-  <Link href={`/posts/${props.filename.slice(0, -3)}`} passHref>
+  <Link href={`/post/${props.filename.slice(0, -3)}`} passHref>
     <LinkContainer sx={props.sx}>{props.children}</LinkContainer>
   </Link>
 );
