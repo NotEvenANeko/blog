@@ -421,7 +421,7 @@
   resolved "https://registry.yarnpkg.com/@types/katex/-/katex-0.11.1.tgz#34de04477dcf79e2ef6c8d23b41a3d81f9ebeaf5"
   integrity sha512-DUlIj2nk0YnJdlWgsFuVKcX27MLW0KbKmGVoUHmFr+74FYYNUDAaj9ZqTADvsbE8rfxuVmSFc7KczYn5Y09ozg==
 
-"@types/mdast@^3.0.0":
+"@types/mdast@*", "@types/mdast@^3.0.0":
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@types/mdast/-/mdast-3.0.10.tgz#4724244a82a4598884cbbe9bcfd73dff927ee8af"
   integrity sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==
@@ -501,6 +501,15 @@
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     csstype "^3.0.2"
+
+"@types/remark-hint@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/remark-hint/-/remark-hint-1.0.0.tgz#7673e063433c53f4619b78d8a73d9bb51c23f563"
+  integrity sha512-fX7jksMA21536LT/llSyT4XzDI3JpbwAKMbKG6c7uPgafFSYeGgZUVE3Dbc4gpOk3YNNl4MJPiiR1d7RdpVLuw==
+  dependencies:
+    "@types/mdast" "*"
+    remark "^14.0.2"
+    unified "^10.1.2"
 
 "@types/scheduler@*":
   version "0.16.2"
