@@ -11,6 +11,7 @@ import remarkRehype from 'remark-rehype';
 import rehypeSlug from 'rehype-slug';
 import rehypeKatex from 'rehype-katex';
 import rehypePrism from 'rehype-prism-plus';
+import rehypeExternalLinks from 'rehype-external-links';
 import rehypeReact, { Options } from 'rehype-react';
 
 export const useMdProcesser = (
@@ -34,6 +35,7 @@ export const useMdProcesser = (
         .use(rehypeKatex)
         .use(rehypePrism, { showLineNumbers: true })
         .use(rehypeSlug)
+        .use(rehypeExternalLinks, { target: '_blank', rel: false })
         .use(rehypeReact, {
           createElement,
           Fragment,
