@@ -22,6 +22,7 @@ export const BodyHeader: FC<Omit<DefaultLayoutProps, 'children'>> = (props) => (
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        px: '10%',
       }}
     >
       {props.headerTitle &&
