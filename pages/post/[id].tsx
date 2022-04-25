@@ -205,6 +205,7 @@ PostPage.headerTitle = ({ data }: { data: PostContent }) => (
 );
 
 PostPage.headerHeight = 60;
+PostPage.headerBanner = (props) => (props as { data: PostContent }).data.banner;
 
 export const getStaticPaths: GetStaticPaths = () => ({
   paths: getPostLists().map((item) => ({

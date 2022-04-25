@@ -8,8 +8,11 @@ export const BodyHeader: FC<Omit<DefaultLayoutProps, 'children'>> = (props) => (
   <Box
     sx={{
       height: `${props.headerHeight}vh`,
-      background:
-        'rgba(0, 0, 0, 0) url("https://rmt.dogedoge.com/fetch/fluid/storage/bg/1cm6iu.png?w=1920&fmt=webp") no-repeat scroll center center / cover',
+      background: `rgba(0, 0, 0, 0) url("${
+        props.headerBanner ||
+        process.env.NEXT_PUBLIC_HEADER_PICTURE_FALLBACK ||
+        'http://api.dujin.org/bing/1920.php'
+      }") no-repeat scroll center center / cover`,
     }}
   >
     <Box

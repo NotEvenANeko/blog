@@ -5,6 +5,7 @@ import { BodyHeader } from './bodyHeader';
 export interface DefaultLayoutProps {
   headerTitle?: string | ReactElement;
   headerHeight: number;
+  headerBanner?: string;
   children: ReactNode;
 }
 

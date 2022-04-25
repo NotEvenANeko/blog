@@ -42,6 +42,7 @@ export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   headerTitle?: string | FC<any>;
   headerHeight?: number;
+  headerBanner?: string | ((props: unknown) => string | undefined);
   activeFab?: boolean;
 };
 
@@ -80,6 +81,11 @@ const MyApp: FC<AppWithLayoutProps> = ({ Component, pageProps }) => {
               )
             }
             headerHeight={Component.headerHeight ?? 55}
+            headerBanner={
+              typeof Component.headerBanner === 'function'
+                ? Component.headerBanner(pageProps)
+                : Component.headerBanner
+            }
           >
             <Component {...pageProps} />
           </DefaultLayout>
