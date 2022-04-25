@@ -17,85 +17,97 @@ const FriendPage: NextPageWithLayout<
       flexDirection: 'column',
     }}
   >
-    <Grid
-      container
-      spacing={2}
-      sx={{
-        m: 0,
-      }}
-    >
-      {data.map((item, index) => (
-        <Grid
-          item
-          xs={12}
-          md={4}
-          key={index}
-          component="a"
-          href={item.link}
-          sx={{
-            cursor: 'pointer',
-            borderRadius: '0.3rem',
-            p: '1rem',
-            m: '1rem 0',
-            transition: (theme: Theme) =>
-              theme.transitions.create(['background-color'], {
-                duration: theme.transitions.duration.standard,
-              }),
-            '&:hover': {
-              backgroundColor: '#f8f9fa',
+    {data.length > 0 ? (
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          m: 0,
+        }}
+      >
+        {data.map((item, index) => (
+          <Grid
+            item
+            xs={12}
+            md={4}
+            key={index}
+            component="a"
+            href={item.link}
+            sx={{
+              cursor: 'pointer',
+              borderRadius: '0.3rem',
+              p: '1rem',
+              m: '1rem 0',
               transition: (theme: Theme) =>
                 theme.transitions.create(['background-color'], {
                   duration: theme.transitions.duration.standard,
                 }),
-            },
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar
-            alt="avatar"
-            src={item.avatar}
-            sx={{
-              width: '3rem',
-              height: '3rem',
-              marginRight: '0.75rem',
-            }}
-          >
-            <AccountCircle />
-          </Avatar>
-          <Box
-            sx={{
+              '&:hover': {
+                backgroundColor: '#f8f9fa',
+                transition: (theme: Theme) =>
+                  theme.transitions.create(['background-color'], {
+                    duration: theme.transitions.duration.standard,
+                  }),
+              },
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-              height: '100%',
-              flex: '1',
-              lineHeight: '1.5rem',
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
-            <Typography
+            <Avatar
+              alt="avatar"
+              src={item.avatar}
               sx={{
-                fontWeight: 'bold',
+                width: '3rem',
+                height: '3rem',
+                marginRight: '0.75rem',
               }}
             >
-              {item.name}
-            </Typography>
-            <Typography
+              <AccountCircle />
+            </Avatar>
+            <Box
               sx={{
-                maxHeight: '2rem',
-                fontSize: '0.85rem',
-                color: (theme: Theme) => theme.palette.text.secondary,
-                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                height: '100%',
+                flex: '1',
+                lineHeight: '1.5rem',
               }}
             >
-              {item.description ?? ''}
-            </Typography>
-          </Box>
-        </Grid>
-      ))}
-    </Grid>
+              <Typography
+                sx={{
+                  fontWeight: 'bold',
+                }}
+              >
+                {item.name}
+              </Typography>
+              <Typography
+                sx={{
+                  maxHeight: '2rem',
+                  fontSize: '0.85rem',
+                  color: (theme: Theme) => theme.palette.text.secondary,
+                  overflow: 'hidden',
+                }}
+              >
+                {item.description ?? ''}
+              </Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+    ) : (
+      <Typography
+        sx={{
+          fontSize: '1.5rem',
+          marginBottom: '2rem',
+          mx: 'auto',
+        }}
+      >
+        还没有友链哦
+      </Typography>
+    )}
     <Typography
       sx={{
         color: (theme: Theme) => theme.palette.text.secondary,
