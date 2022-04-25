@@ -142,7 +142,7 @@ export const AppHeader: FC = () => {
                 fontWeight: 'bolder',
               }}
             >
-              TEST
+              {process.env.NEXT_PUBLIC_HEADER_TEXT ?? ''}
             </Typography>
 
             <Stack

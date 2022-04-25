@@ -54,7 +54,7 @@ const MyApp: FC<AppWithLayoutProps> = ({ Component, pageProps }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Head>
-        <title>Create Next App</title>
+        <title>{process.env.NEXT_PUBLIC_SITE_TITLE ?? 'Next.js blog'}</title>
         <meta
           name="viewport"
           content="width=device-width, viewport-fit=cover"

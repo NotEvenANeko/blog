@@ -214,7 +214,7 @@ const Home: NextPageWithLayout<
   );
 };
 
-Home.headerTitle = '归档';
+Home.headerTitle = process.env.NEXT_PUBLIC_MAIN_HEADER;
 Home.headerHeight = 100;
 
 export const getStaticProps = () => ({

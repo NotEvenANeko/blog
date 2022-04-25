@@ -1,7 +1,10 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      NEXT_PUBLIC_SITE_LABEL: string;
+      NEXT_PUBLIC_SITE_TITLE: string;
+      NEXT_PUBLIC_MAIN_HEADER: string;
+      NEXT_PUBLIC_SITE_DESC: string;
+      NEXT_PUBLIC_HEADER_TEXT: string;
     }
   }
 }
