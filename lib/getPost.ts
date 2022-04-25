@@ -16,12 +16,13 @@ export interface PostContent {
 
 export const getPostContent = (filename: string): PostContent => {
   const frontMatter = matter(
-    fs.readFileSync(path.join(BlogPostPath, filename), 'utf-8')
+    fs.readFileSync(path.join(BlogPostPath, path.basename(filename)), 'utf-8')
   );
   return {
     content: frontMatter.content,
     title: frontMatter.data.title as string,
-    createdAt: fs.statSync(path.join(BlogPostPath, filename)).birthtimeMs,
+    createdAt: fs.statSync(path.join(BlogPostPath, path.basename(filename)))
+      .birthtimeMs,
     categories: (frontMatter.data.categories as string[] | undefined) || [],
     banner: frontMatter.data.banner as string,
     license: {

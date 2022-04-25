@@ -10,7 +10,7 @@
 - [x] impl archives page
 - [x] impl tags page
 - [ ] impl about page (using mdx?)
-- [ ] impl friend link page
+- [x] impl friend link page
 - [ ] add dark mode
 - [ ] change header picture, bing api?
 - [ ] add search
