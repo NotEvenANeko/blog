@@ -20,6 +20,7 @@ import { NextPageWithLayout } from '../_app';
 
 const MarkdownContainer = styled(Box)(({ theme }) => ({
   padding: '0 5%',
+  overflow: 'auto',
   '& blockquote': {
     color: theme.palette.text.secondary,
     padding: '0 1em',
