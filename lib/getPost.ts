@@ -10,7 +10,7 @@ export interface PostContent {
   title: string;
   createdAt: number;
   categories: string[];
-  banner: string;
+  banner?: string;
   license: typeof spdxLicenseList[number];
 }
 
@@ -24,7 +24,7 @@ export const getPostContent = (filename: string): PostContent => {
     createdAt: fs.statSync(path.join(BlogPostPath, path.basename(filename)))
       .birthtimeMs,
     categories: (frontMatter.data.categories as string[] | undefined) || [],
-    banner: frontMatter.data.banner as string,
+    banner: (frontMatter.data.banner as string | undefined) ?? '',
     license: {
       ...spdxLicenseList[
         (frontMatter.data.license as string | undefined) ?? 'CC-BY-NC-SA-4.0'

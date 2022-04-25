@@ -9,7 +9,7 @@ export interface PostsDetail {
   description: string;
   categories: string[];
   createdAt: number;
-  banner: string;
+  banner?: string;
   filename: string;
 }
 
@@ -42,7 +42,7 @@ export const getPostsDetail = (offset = 0, pageSize = 10): PostsDetail[] =>
         createdAt: fs.statSync(path.join(BlogPostPath, file)).birthtimeMs,
         categories: (frontMatter.data.categories as string[] | undefined) || [],
         filename: file,
-        banner: frontMatter.data.banner as string,
+        banner: (frontMatter.data.banner as string | undefined) ?? '',
       };
     });
 

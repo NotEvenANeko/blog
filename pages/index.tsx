@@ -79,7 +79,11 @@ const Home: NextPageWithLayout<
               >
                 <Image
                   alt="abc"
-                  src={item.banner}
+                  src={
+                    item.banner ||
+                    process.env.NEXT_PUBLIC_POST_LIST_PICTURE_FALLBACK ||
+                    'https://images.unsplash.com/photo-1650420352149-0d7d449d44b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'
+                  }
                   layout="fill"
                   objectFit="cover"
                 />
