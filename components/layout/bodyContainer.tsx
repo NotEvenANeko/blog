@@ -39,8 +39,8 @@ export const BodyContainer: FC<DefaultLayoutProps> = (props) => {
           lg: theme.contentWidthScale * theme.breakpoints.values.lg,
         }),
         padding: {
-          xs: 0,
-          sm: 'initial',
+          xs: '0 0 2rem 0',
+          sm: 'initial initial 2rem initial',
         },
       }}
     >

@@ -40,7 +40,6 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
       <Box
         sx={{
           backgroundColor: (theme: Theme) => theme.palette.grey[200],
-          paddingBottom: '2rem',
           minHeight: '100vh',
         }}
       >
