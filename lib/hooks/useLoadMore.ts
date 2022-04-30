@@ -1,4 +1,4 @@
-import { BaseResponse } from 'lib/interfaces';
+import type { BaseResponse } from 'lib/interfaces';
 import { useCallback, useEffect, useState } from 'react';
 import { throttle } from 'throttle-debounce';
 

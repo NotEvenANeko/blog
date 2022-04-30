@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import { FC, ReactElement, ReactNode } from 'react';
+import type { FC, ReactElement, ReactNode } from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';

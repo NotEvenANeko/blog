@@ -1,4 +1,4 @@
-import { FC, useState, useMemo, useCallback, useEffect } from 'react';
+import { type FC, useState, useMemo, useCallback, useEffect } from 'react';
 import {
   Box,
   Typography,

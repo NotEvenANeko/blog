@@ -17,7 +17,7 @@ import {
   H6Title,
 } from 'components/markdown';
 import { TagContainer, LinkContainer } from 'components';
-import { NextPageWithLayout } from '../_app';
+import type { NextPageWithLayout } from '../_app';
 
 const MarkdownContainer = styled(Box)(({ theme }) => ({
   padding: '0 5%',

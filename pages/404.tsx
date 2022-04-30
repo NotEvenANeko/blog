@@ -1,5 +1,5 @@
 import { BodyHeader } from 'components/layout/bodyHeader';
-import { NextPageWithLayout } from './_app';
+import type { NextPageWithLayout } from './_app';
 
 const Custom404: NextPageWithLayout = () => <></>;
 

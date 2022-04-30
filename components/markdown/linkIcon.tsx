@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { Box, Fade } from '@mui/material';
 import { Link as LinkIcon } from '@mui/icons-material';
 

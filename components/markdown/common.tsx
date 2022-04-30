@@ -1,5 +1,6 @@
-import { FC, HTMLAttributes, useState, MouseEventHandler } from 'react';
-import { Typography, SxProps } from '@mui/material';
+import type { FC, HTMLAttributes, MouseEventHandler } from 'react';
+import { useState } from 'react';
+import { Typography, type SxProps } from '@mui/material';
 
 import { HTitleLinkIcon } from './linkIcon';
 

@@ -3,7 +3,7 @@ import { AccountCircle } from '@mui/icons-material';
 import { Avatar, Grid, Box, Typography, type Theme } from '@mui/material';
 
 import { getFriends } from 'lib';
-import { NextPageWithLayout } from './_app';
+import type { NextPageWithLayout } from './_app';
 import { LinkContainer } from 'components/linkContainer';
 
 const FriendPage: NextPageWithLayout<

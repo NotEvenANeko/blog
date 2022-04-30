@@ -1,13 +1,13 @@
-import { InferGetStaticPropsType } from 'next';
+import type { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { Box, Stack, Typography, Theme, SxProps, Fade } from '@mui/material';
 import { CalendarMonth, LocalOffer } from '@mui/icons-material';
 import dayjs from 'dayjs';
+import Link from 'next/link';
+import type { FC, ReactNode } from 'react';
 
 import { getPostsDetail } from 'lib';
 import type { NextPageWithLayout } from './_app';
-import Link from 'next/link';
-import { FC, ReactNode } from 'react';
 import { useLoadMore } from 'lib/hooks';
 import { TagContainer, LinkContainer } from 'components';
 

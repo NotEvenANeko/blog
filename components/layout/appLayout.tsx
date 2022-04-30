@@ -1,4 +1,10 @@
-import { FC, useState, useEffect, useCallback, ReactNode } from 'react';
+import {
+  type FC,
+  useState,
+  useEffect,
+  useCallback,
+  type ReactNode,
+} from 'react';
 import { Box, Theme, Slide, Fab } from '@mui/material';
 import { ExpandLess } from '@mui/icons-material';
 import { throttle } from 'throttle-debounce';
