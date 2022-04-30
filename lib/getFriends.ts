@@ -10,8 +10,4 @@ export interface FriendLink {
 }
 
 export const getFriends = (): FriendLink[] =>
-  (
-    JSON.parse(fs.readFileSync(FriendsFilePath, 'utf-8')) as {
-      data: FriendLink[];
-    }
-  )['data'];
+  JSON.parse(fs.readFileSync(FriendsFilePath, 'utf-8')) as FriendLink[];
