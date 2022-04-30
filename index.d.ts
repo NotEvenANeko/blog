@@ -8,6 +8,8 @@ declare global {
       NEXT_PUBLIC_GITHUB_REPO_LINK: string;
       NEXT_PUBLIC_POST_LIST_PICTURE_FALLBACK: string;
       NEXT_PUBLIC_HEADER_PICTURE_FALLBACK: string;
+
+      REVALIDATE_TOKEN: string;
     }
   }
 }
