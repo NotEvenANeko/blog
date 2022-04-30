@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Box, styled, Typography } from '@mui/material';
+import { Box, styled, Typography, CircularProgress } from '@mui/material';
 import { CalendarMonth, LocalOffer, Copyright } from '@mui/icons-material';
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
@@ -104,6 +105,8 @@ const MarkdownContainer = styled(Box)(({ theme }) => ({
 const PostPage: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ data }) => {
+  const router = useRouter();
+
   const componentMapping = useMemo(
     () => ({
       h1: H1Title,
@@ -116,7 +119,18 @@ const PostPage: NextPageWithLayout<
     []
   );
 
-  const content = useMdProcesser(data.content, componentMapping);
+  const content = useMdProcesser(data?.content, componentMapping);
+
+  if (router.isFallback) {
+    return (
+      <CircularProgress
+        sx={{
+          alignSelf: 'center',
+          margin: '0 auto',
+        }}
+      />
+    );
+  }
 
   return <MarkdownContainer>{content}</MarkdownContainer>;
 };
@@ -131,82 +145,99 @@ PostPage.headerTitle = ({ data }: { data: PostContent }) => (
       color: 'common.white',
     }}
   >
-    <Typography
-      sx={{
-        fontSize: '2.5rem',
-        fontWeight: 500,
-        lineHeight: '1.2',
-      }}
-    >
-      {data.title}
-    </Typography>
-    <TagContainer
-      sx={{
-        marginTop: '1rem',
-      }}
-    >
-      <CalendarMonth
-        sx={{
-          marginRight: '0.2rem',
-          fontSize: '1rem',
-          lineHeight: 1,
-        }}
-      />
-      <Typography>{dayjs(data.createdAt).format('YYYY-M-D HH:mm')}</Typography>
-    </TagContainer>
-    {data.categories.length > 0 && (
-      <TagContainer
-        sx={{
-          marginTop: '0.2rem',
-        }}
-      >
-        <LocalOffer
+    {data ? (
+      <>
+        <Typography
           sx={{
-            marginRight: '0.2rem',
-            fontSize: '1rem',
-            lineHeight: 1,
+            fontSize: '2.5rem',
+            fontWeight: 500,
+            lineHeight: '1.2',
           }}
-        />
-        {data.categories.map((tag, index) => (
-          <Link key={index} href={`/tag/${tag}`} passHref>
-            <LinkContainer>
-              <Typography
-                sx={{
-                  marginRight:
-                    index === data.categories.length - 1 ? 0 : '0.2rem',
-                  fontSize: 'inherit',
-                }}
-              >
-                {`#${tag}`}
-              </Typography>
-            </LinkContainer>
-          </Link>
-        ))}
-      </TagContainer>
-    )}
-    <TagContainer
-      sx={{
-        marginTop: '0.2rem',
-      }}
-    >
-      <Copyright
-        sx={{ marginRight: '0.2rem', fontSize: '1rem', lineHeight: 1 }}
-      />
+        >
+          {data.title}
+        </Typography>
+        <TagContainer
+          sx={{
+            marginTop: '1rem',
+          }}
+        >
+          <CalendarMonth
+            sx={{
+              marginRight: '0.2rem',
+              fontSize: '1rem',
+              lineHeight: 1,
+            }}
+          />
+          <Typography>
+            {dayjs(data.createdAt).format('YYYY-M-D HH:mm')}
+          </Typography>
+        </TagContainer>
+        {data.categories.length > 0 && (
+          <TagContainer
+            sx={{
+              marginTop: '0.2rem',
+            }}
+          >
+            <LocalOffer
+              sx={{
+                marginRight: '0.2rem',
+                fontSize: '1rem',
+                lineHeight: 1,
+              }}
+            />
+            {data.categories.map((tag, index) => (
+              <Link key={index} href={`/tag/${tag}`} passHref>
+                <LinkContainer>
+                  <Typography
+                    sx={{
+                      marginRight:
+                        index === data.categories.length - 1 ? 0 : '0.2rem',
+                      fontSize: 'inherit',
+                    }}
+                  >
+                    {`#${tag}`}
+                  </Typography>
+                </LinkContainer>
+              </Link>
+            ))}
+          </TagContainer>
+        )}
+        <TagContainer
+          sx={{
+            marginTop: '0.2rem',
+          }}
+        >
+          <Copyright
+            sx={{ marginRight: '0.2rem', fontSize: '1rem', lineHeight: 1 }}
+          />
+          <Typography
+            component="a"
+            href={data.license.url}
+            sx={{
+              cursor: 'pointer',
+            }}
+          >
+            {data.license.name}
+          </Typography>
+        </TagContainer>
+      </>
+    ) : (
       <Typography
-        component="a"
-        href={data.license.url}
         sx={{
-          cursor: 'pointer',
+          fontSize: '2.5rem',
+          fontWeight: 500,
+          lineHeight: '1.2',
         }}
       >
-        {data.license.name}
+        加载中...
       </Typography>
-    </TagContainer>
+    )}
   </Box>
 );
 
 PostPage.headerHeight = 60;
-PostPage.headerBanner = (props) => (props as { data: PostContent }).data.banner;
+PostPage.headerBanner = (props) =>
+  (props as { data: PostContent }).data?.banner;
 
 export const getStaticPaths: GetStaticPaths = () => ({
   paths: getPostLists().map((item) => ({
@@ -214,7 +245,7 @@ export const getStaticPaths: GetStaticPaths = () => ({
       id: item.slice(0, -3),
     },
   })),
-  fallback: false,
+  fallback: true,
 });
 
 export const getStaticProps: GetStaticProps<
@@ -223,6 +254,13 @@ export const getStaticProps: GetStaticProps<
 > = (context) => {
   const filename = context.params?.id ?? '';
   const postContent = getPostContent(`${filename}.md`);
+
+  if (!postContent) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       data: {

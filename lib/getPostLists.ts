@@ -35,14 +35,15 @@ export const getPostsDetail = (offset = 0, pageSize = 10): PostsDetail[] =>
       return {
         title: frontMatter.data.title as string,
         description:
-          (frontMatter.data.description as string | undefined) ||
+          (frontMatter.data?.description as string | undefined) ||
           `${frontMatter.content.slice(0, 50)}${
             frontMatter.content.length > 50 ? '...' : ''
           }`,
         createdAt: fs.statSync(path.join(BlogPostPath, file)).birthtimeMs,
-        categories: (frontMatter.data.categories as string[] | undefined) || [],
+        categories:
+          (frontMatter.data?.categories as string[] | undefined) || [],
         filename: file,
-        banner: (frontMatter.data.banner as string | undefined) ?? '',
+        banner: (frontMatter.data?.banner as string | undefined) ?? '',
       };
     });
 

@@ -10,11 +10,14 @@ export interface PostContent {
   title: string;
   createdAt: number;
   categories: string[];
-  banner?: string;
+  banner: string;
   license: typeof spdxLicenseList[number];
 }
 
-export const getPostContent = (filename: string): PostContent => {
+export const getPostContent = (filename: string): PostContent | null => {
+  if (!fs.existsSync(path.join(BlogPostPath, filename))) {
+    return null;
+  }
   const frontMatter = matter(
     fs.readFileSync(path.join(BlogPostPath, path.basename(filename)), 'utf-8')
   );
