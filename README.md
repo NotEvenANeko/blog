@@ -12,7 +12,7 @@
 - [ ] impl about page (using mdx?)
 - [x] impl friend link page
 - [ ] add dark mode
-- [ ] change header picture, bing api?
+- [x] change header picture, bing api?
 - [ ] add search
 - [ ] add comment system, maybe gittalk?
 - [ ] impl pwa for mobile
@@ -24,3 +24,4 @@
 - [ ] add accessibility
 - [ ] refactor code, using mui typography for different font style
 - [ ] seperate category from tag
+- [ ] add rss
