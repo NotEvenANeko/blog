@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Friend link schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "link": {
+        "type": "string",
+        "format": "uri"
+      },
+      "name": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "avatar": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "required": [
+      "link",
+      "name"
+    ]
+  }
+}
