@@ -33,6 +33,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-# user posts
-/posts
