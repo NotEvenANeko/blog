@@ -80,6 +80,7 @@ export const AppHeader: FC = () => {
             disableRipple={!!disableInnerRipple}
             startIcon={item.icon}
             sx={{
+              width: disableInnerRipple ? '100%' : 'initial',
               color: 'primary.contrastText',
               '& .MuiButton-startIcon': {
                 marginRight: 0.5,
