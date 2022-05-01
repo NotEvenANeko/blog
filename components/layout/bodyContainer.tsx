@@ -11,7 +11,6 @@ export const BodyContainer: FC<DefaultLayoutProps> = ({
   const [paperMarginTop, setPaperMarginTop] = useState(2);
 
   useEffect(() => {
-    console.log('triggered');
     const calculateMarginTop = () =>
       Math.min(
         6,
