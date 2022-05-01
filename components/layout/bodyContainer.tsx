@@ -4,31 +4,39 @@ import { throttle } from 'throttle-debounce';
 
 import type { DefaultLayoutProps } from './defaultLayout';
 
-export const BodyContainer: FC<DefaultLayoutProps> = (props) => {
+export const BodyContainer: FC<DefaultLayoutProps> = ({
+  headerHeight,
+  children,
+}) => {
   const [paperMarginTop, setPaperMarginTop] = useState(2);
 
   useEffect(() => {
-    const onScroll = throttle(10, () => {
-      setPaperMarginTop((cur) => {
-        return document.documentElement.scrollTop +
-          document.documentElement.clientHeight +
-          0.1 * window.innerHeight >
-          document.documentElement.scrollHeight
-          ? cur
-          : Math.min(
-              6,
-              ((document.documentElement.clientHeight -
-                (props.headerHeight / 100) * window.innerHeight +
-                document.documentElement.scrollTop) /
-                (0.8 * window.innerHeight)) *
-                6
-            );
-      });
+    console.log('triggered');
+    const calculateMarginTop = () =>
+      Math.min(
+        6,
+        ((document.documentElement.clientHeight -
+          (headerHeight / 100) * window.innerHeight +
+          document.documentElement.scrollTop) /
+          (0.8 * window.innerHeight)) *
+          6
+      );
+    const onScroll = throttle(10, (ev?: Event) => {
+      if (!ev) setPaperMarginTop(calculateMarginTop());
+      else
+        setPaperMarginTop((cur) => {
+          return document.documentElement.scrollTop +
+            document.documentElement.clientHeight +
+            0.1 * window.innerHeight >
+            document.documentElement.scrollHeight
+            ? cur
+            : calculateMarginTop();
+        });
     });
     onScroll();
     document.addEventListener('scroll', onScroll);
     return () => document.removeEventListener('scroll', onScroll);
-  }, [props.headerHeight]);
+  }, [headerHeight]);
 
   return (
     <Container
@@ -52,12 +60,12 @@ export const BodyContainer: FC<DefaultLayoutProps> = (props) => {
             xs: '0',
             sm: `-${paperMarginTop}rem`,
           },
-          minHeight: `${100 - props.headerHeight}vh`,
+          minHeight: `${100 - headerHeight}vh`,
           borderRadius: '0.5rem',
           display: 'flex',
         }}
       >
-        {props.children}
+        {children}
       </Paper>
     </Container>
   );
