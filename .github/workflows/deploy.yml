@@ -7,7 +7,7 @@ on:
 
 env:
   NEXT_TELEMETRY_DISABLED: 1
-  NEXT_PUBLIC_URL: ${{ vars.URL }}
+  NEXT_PUBLIC_URL: ${{ format('https://{0}', vars.URL) }}
 
 jobs:
   build:
