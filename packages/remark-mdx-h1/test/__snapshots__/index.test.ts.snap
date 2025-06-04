@@ -1,0 +1,97 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`remark-mdx-h1 > should extract h1 and remove it 1`] = `
+"import {Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
+export const h1 = {
+  "heading": "I'm Heading 1",
+  "subHeading": "This is sub heading"
+};
+function _createMdxContent(props) {
+  const _components = {
+    h2: "h2",
+    p: "p",
+    ...props.components
+  };
+  return _jsxs(_Fragment, {
+    children: [_jsx(_components.p, {
+      children: "This is not"
+    }), "\\n", _jsx(_components.h2, {
+      children: "Heading 2"
+    })]
+  });
+}
+export default function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
+"
+`;
+
+exports[`remark-mdx-h1 > should not extract sub heading if not exists 1`] = `
+"import {jsx as _jsx} from "react/jsx-runtime";
+export const h1 = {
+  "heading": "I'm H1",
+  "subHeading": undefined
+};
+function _createMdxContent(props) {
+  const _components = {
+    h2: "h2",
+    ...props.components
+  };
+  return _jsx(_components.h2, {
+    children: "There's no sub heading"
+  });
+}
+export default function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
+"
+`;
+
+exports[`remark-mdx-h1 > should not remove h1 if opt out of remove 1`] = `
+"import {Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
+export const h1 = {
+  "heading": "I'm Heading 1",
+  "subHeading": "This is sub heading"
+};
+function _createMdxContent(props) {
+  const _components = {
+    h1: "h1",
+    h2: "h2",
+    p: "p",
+    ...props.components
+  };
+  return _jsxs(_Fragment, {
+    children: [_jsx(_components.h1, {
+      children: "I'm Heading 1"
+    }), "\\n", _jsx(_components.p, {
+      children: "This is sub heading"
+    }), "\\n", _jsx(_components.p, {
+      children: "This is not"
+    }), "\\n", _jsx(_components.h2, {
+      children: "Heading 2"
+    })]
+  });
+}
+export default function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
+"
+`;

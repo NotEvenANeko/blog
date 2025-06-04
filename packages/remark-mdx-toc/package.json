@@ -1,0 +1,32 @@
+{
+  "name": "@notevenaneko/remark-mdx-toc",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "build": "tsup"
+  },
+  "module": "./dist/index.js",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "dependencies": {
+    "estree-util-value-to-estree": "^3.4.0",
+    "mdast-util-to-string": "^4.0.0",
+    "unist-util-mdx-define": "^1.1.2",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@mdx-js/mdx": "^3.1.0",
+    "@types/mdast": "^4.0.4",
+    "remark": "^15.0.1",
+    "tsup": "^8.5.0",
+    "unified": "^11.0.5",
+    "vitest": "^3.1.4"
+  },
+  "peerDependencies": {
+    "remark": "^15.0.1",
+    "unified": "^11.0.5"
+  }
+}

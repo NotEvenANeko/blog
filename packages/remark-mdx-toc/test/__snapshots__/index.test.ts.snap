@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`remark-mdx-toc > should extract headings 1`] = `
+"import {Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
+export const toc = [{
+  "depth": 1,
+  "heading": "Level 1",
+  "data": undefined
+}, {
+  "depth": 2,
+  "heading": "Level 2",
+  "data": undefined
+}, {
+  "depth": 3,
+  "heading": "Level 3",
+  "data": undefined
+}, {
+  "depth": 2,
+  "heading": "Level 2 again",
+  "data": undefined
+}, {
+  "depth": 5,
+  "heading": "Level 5",
+  "data": undefined
+}];
+function _createMdxContent(props) {
+  const _components = {
+    h1: "h1",
+    h2: "h2",
+    h3: "h3",
+    h5: "h5",
+    p: "p",
+    ...props.components
+  };
+  return _jsxs(_Fragment, {
+    children: [_jsx(_components.h1, {
+      children: "Level 1"
+    }), "\\n", _jsx(_components.p, {
+      children: "Hello"
+    }), "\\n", _jsx(_components.h2, {
+      children: "Level 2"
+    }), "\\n", _jsx(_components.h3, {
+      children: "Level 3"
+    }), "\\n", _jsx(_components.h2, {
+      children: "Level 2 again"
+    }), "\\n", _jsx(_components.h5, {
+      children: "Level 5"
+    })]
+  });
+}
+export default function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
+"
+`;

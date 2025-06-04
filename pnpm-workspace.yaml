@@ -1,0 +1,8 @@
+onlyBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
+packages:
+  - packages/*
+
+includeWorkspaceRoot: true
