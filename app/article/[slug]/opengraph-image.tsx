@@ -8,6 +8,9 @@ export { generateStaticParams } from "./page";
 
 export const dynamicParams = false;
 
+// FIXME: we need dynamic :(
+export const contentType = "image/jpeg";
+
 const Image = async ({ params }: Props) => {
   const markdownProvider = await createMarkdownProvider();
   const {

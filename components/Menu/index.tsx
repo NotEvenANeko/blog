@@ -59,7 +59,7 @@ export const Menu = () => {
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
-      <Separator className="mx-[-4rem]" />
+      <Separator className="!w-[calc(100%_+_8rem)] -ms-[4rem]" />
     </NavigationMenu>
   );
 };
