@@ -7,9 +7,12 @@ on:
 
 env:
   NEXT_TELEMETRY_DISABLED: 1
+  NEXT_PUBLIC_URL: ${{ vars.URL }}
 
 jobs:
   build:
+    environment:
+      name: github-pages
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
