@@ -17,9 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: test
-        run: echo $NEXT_PUBLIC_URL
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
