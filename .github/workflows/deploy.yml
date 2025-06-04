@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+
 jobs:
   build:
     environment:
