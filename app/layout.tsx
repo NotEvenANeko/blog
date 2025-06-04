@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
+  metadataBase: new URL("/", process.env.NEXT_PUBLIC_URL!),
   title: "Blog",
   description: "Blog of Neko (WIP)",
 };
