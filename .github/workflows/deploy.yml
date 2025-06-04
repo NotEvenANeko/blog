@@ -11,8 +11,8 @@ env:
 
 jobs:
   build:
-    environment:
-      name: github-pages
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
@@ -40,22 +40,31 @@ jobs:
       - name: Build
         run: pnpm -r run build
 
-      - name: Upload static files as artifact
-        id: deployment
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload artifacts
+        id: upload
+        uses: actions/upload-artifact@v4
         with:
-          path: out/
+          name: output
+          path: out/*
+          if-no-files-found: error
 
   deploy:
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact-id }}
+          path: ./out
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
