@@ -16,7 +16,7 @@ body:
       placeholder: 'John Doe'
     validations:
       required: true
-  - type: input
+  - type: textarea
     attributes:
       label: 'Introduce yourself to others!'
       placeholder: '21 y.o. Front-End Developer from China...'
